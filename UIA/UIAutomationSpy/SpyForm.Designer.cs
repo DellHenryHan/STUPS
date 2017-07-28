@@ -9,15 +9,15 @@
 
 namespace UIAutomationSpy
 {
-	//extern alias UiaCOM;
-	using System;
-	using System.Windows.Automation;
-	using System.Windows.Forms;
-	using System.Drawing;
-	//using UiaCOM3;
-	//using UIAutomationClient;
-	
-	using System.Management.Automation;
+    //extern alias UiaCOM;
+    using System;
+    using System.Windows.Automation;
+    using System.Windows.Forms;
+    using System.Drawing;
+    //using UiaCOM3;
+    //using UIAutomationClient;
+    
+    using System.Management.Automation;
     using System.Security.Cryptography;
 
     partial class SpyForm
@@ -58,13 +58,13 @@ namespace UIAutomationSpy
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpyForm));
             this.btnStart = new System.Windows.Forms.Button();
             this.richControlCode = new System.Windows.Forms.RichTextBox();
             this.btnStop = new System.Windows.Forms.Button();
             this.chkClipboard = new System.Windows.Forms.CheckBox();
             this.tabOuter = new System.Windows.Forms.TabControl();
             this.tabCode = new System.Windows.Forms.TabPage();
+            this.btnSaveControl = new System.Windows.Forms.Button();
             this.chkTestCode = new System.Windows.Forms.CheckBox();
             this.tabInner = new System.Windows.Forms.TabControl();
             this.tabControl = new System.Windows.Forms.TabPage();
@@ -132,6 +132,10 @@ namespace UIAutomationSpy
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Browse = new System.Windows.Forms.Button();
+            this.xmlfile = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.status = new System.Windows.Forms.Label();
             this.tabOuter.SuspendLayout();
             this.tabCode.SuspendLayout();
             this.tabInner.SuspendLayout();
@@ -180,7 +184,7 @@ namespace UIAutomationSpy
             // 
             // chkClipboard
             // 
-            this.chkClipboard.Location = new System.Drawing.Point(176, 5);
+            this.chkClipboard.Location = new System.Drawing.Point(257, 6);
             this.chkClipboard.Name = "chkClipboard";
             this.chkClipboard.Size = new System.Drawing.Size(190, 17);
             this.chkClipboard.TabIndex = 4;
@@ -203,6 +207,7 @@ namespace UIAutomationSpy
             // 
             // tabCode
             // 
+            this.tabCode.Controls.Add(this.btnSaveControl);
             this.tabCode.Controls.Add(this.chkTestCode);
             this.tabCode.Controls.Add(this.tabInner);
             this.tabCode.Controls.Add(this.chkClipboard);
@@ -216,9 +221,19 @@ namespace UIAutomationSpy
             this.tabCode.Text = "Code";
             this.tabCode.UseVisualStyleBackColor = true;
             // 
+            // btnSaveControl
+            // 
+            this.btnSaveControl.Enabled = false;
+            this.btnSaveControl.Location = new System.Drawing.Point(168, 6);
+            this.btnSaveControl.Name = "btnSaveControl";
+            this.btnSaveControl.Size = new System.Drawing.Size(84, 30);
+            this.btnSaveControl.TabIndex = 0;
+            this.btnSaveControl.Text = "Save Control";
+            this.btnSaveControl.Click += new System.EventHandler(this.btnSaveControl_Click);
+            // 
             // chkTestCode
             // 
-            this.chkTestCode.Location = new System.Drawing.Point(176, 23);
+            this.chkTestCode.Location = new System.Drawing.Point(257, 23);
             this.chkTestCode.Name = "chkTestCode";
             this.chkTestCode.Size = new System.Drawing.Size(190, 17);
             this.chkTestCode.TabIndex = 5;
@@ -417,39 +432,38 @@ namespace UIAutomationSpy
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                                    this.fileToolStripMenuItem,
-                                    this.editToolStripMenuItem,
-                                    this.viewToolStripMenuItem,
-                                    this.modeToolStripMenuItem,
-                                    this.automationToolStripMenuItem,
-                                    this.toolsToolStripMenuItem,
-                                    this.helpToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.viewToolStripMenuItem,
+            this.modeToolStripMenuItem,
+            this.automationToolStripMenuItem,
+            this.toolsToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(444, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(448, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                                    this.newToolStripMenuItem,
-                                    this.openToolStripMenuItem,
-                                    this.toolStripSeparator,
-                                    this.saveToolStripMenuItem,
-                                    this.saveAsToolStripMenuItem,
-                                    this.toolStripSeparator3,
-                                    this.printToolStripMenuItem,
-                                    this.printPreviewToolStripMenuItem,
-                                    this.toolStripSeparator4,
-                                    this.exitToolStripMenuItem});
+            this.newToolStripMenuItem,
+            this.openToolStripMenuItem,
+            this.toolStripSeparator,
+            this.saveToolStripMenuItem,
+            this.saveAsToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.printToolStripMenuItem,
+            this.printPreviewToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
             // 
-            this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
@@ -458,7 +472,6 @@ namespace UIAutomationSpy
             // 
             // openToolStripMenuItem
             // 
-            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
@@ -472,7 +485,6 @@ namespace UIAutomationSpy
             // 
             // saveToolStripMenuItem
             // 
-            this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
@@ -492,7 +504,6 @@ namespace UIAutomationSpy
             // 
             // printToolStripMenuItem
             // 
-            this.printToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripMenuItem.Image")));
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
@@ -501,7 +512,6 @@ namespace UIAutomationSpy
             // 
             // printPreviewToolStripMenuItem
             // 
-            this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
             this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
             this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
@@ -521,14 +531,14 @@ namespace UIAutomationSpy
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                                    this.undoToolStripMenuItem,
-                                    this.redoToolStripMenuItem,
-                                    this.toolStripSeparator5,
-                                    this.cutToolStripMenuItem,
-                                    this.copyToolStripMenuItem,
-                                    this.pasteToolStripMenuItem,
-                                    this.toolStripSeparator6,
-                                    this.selectAllToolStripMenuItem});
+            this.undoToolStripMenuItem,
+            this.redoToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.cutToolStripMenuItem,
+            this.copyToolStripMenuItem,
+            this.pasteToolStripMenuItem,
+            this.toolStripSeparator6,
+            this.selectAllToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "&Edit";
@@ -554,7 +564,6 @@ namespace UIAutomationSpy
             // 
             // cutToolStripMenuItem
             // 
-            this.cutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripMenuItem.Image")));
             this.cutToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
             this.cutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
@@ -563,7 +572,6 @@ namespace UIAutomationSpy
             // 
             // copyToolStripMenuItem
             // 
-            this.copyToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripMenuItem.Image")));
             this.copyToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
@@ -572,7 +580,6 @@ namespace UIAutomationSpy
             // 
             // pasteToolStripMenuItem
             // 
-            this.pasteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripMenuItem.Image")));
             this.pasteToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
@@ -593,21 +600,20 @@ namespace UIAutomationSpy
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                                    this.codeGenerationToolStripMenuItem,
-                                    this.ancestryTreeToolStripMenuItem,
-                                    this.propertiesToolStripMenuItem,
-                                    this.toolStripSeparator1,
-                                    this.scriptToolStripMenuItem,
-                                    this.scriptResultsToolStripMenuItem,
-                                    this.toolStripSeparator2,
-                                    this.notImplementedToolStripMenuItem});
+            this.codeGenerationToolStripMenuItem,
+            this.ancestryTreeToolStripMenuItem,
+            this.propertiesToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.scriptToolStripMenuItem,
+            this.scriptResultsToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.notImplementedToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
             // 
             // codeGenerationToolStripMenuItem
             // 
-            this.codeGenerationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("codeGenerationToolStripMenuItem.Image")));
             this.codeGenerationToolStripMenuItem.Name = "codeGenerationToolStripMenuItem";
             this.codeGenerationToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.codeGenerationToolStripMenuItem.Text = "Code generation";
@@ -615,7 +621,6 @@ namespace UIAutomationSpy
             // 
             // ancestryTreeToolStripMenuItem
             // 
-            this.ancestryTreeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ancestryTreeToolStripMenuItem.Image")));
             this.ancestryTreeToolStripMenuItem.Name = "ancestryTreeToolStripMenuItem";
             this.ancestryTreeToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.ancestryTreeToolStripMenuItem.Text = "Ancestry tree";
@@ -623,7 +628,6 @@ namespace UIAutomationSpy
             // 
             // propertiesToolStripMenuItem
             // 
-            this.propertiesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("propertiesToolStripMenuItem.Image")));
             this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
             this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.propertiesToolStripMenuItem.Text = "Properties";
@@ -636,7 +640,6 @@ namespace UIAutomationSpy
             // 
             // scriptToolStripMenuItem
             // 
-            this.scriptToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("scriptToolStripMenuItem.Image")));
             this.scriptToolStripMenuItem.Name = "scriptToolStripMenuItem";
             this.scriptToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.scriptToolStripMenuItem.Text = "Script";
@@ -644,7 +647,6 @@ namespace UIAutomationSpy
             // 
             // scriptResultsToolStripMenuItem
             // 
-            this.scriptResultsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("scriptResultsToolStripMenuItem.Image")));
             this.scriptResultsToolStripMenuItem.Name = "scriptResultsToolStripMenuItem";
             this.scriptResultsToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.scriptResultsToolStripMenuItem.Text = "Script results";
@@ -665,8 +667,8 @@ namespace UIAutomationSpy
             // modeToolStripMenuItem
             // 
             this.modeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                                    this.uIAutomationToolStripMenuItem,
-                                    this.seleniumToolStripMenuItem});
+            this.uIAutomationToolStripMenuItem,
+            this.seleniumToolStripMenuItem});
             this.modeToolStripMenuItem.Name = "modeToolStripMenuItem";
             this.modeToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.modeToolStripMenuItem.Text = "Mode";
@@ -692,18 +694,17 @@ namespace UIAutomationSpy
             // automationToolStripMenuItem
             // 
             this.automationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                                    this.startRecordingToolStripMenuItem,
-                                    this.stopRecorgingToolStripMenuItem,
-                                    this.runScriptToolStripMenuItem,
-                                    this.runSelectionToolStripMenuItem,
-                                    this.breakScriptToolStripMenuItem});
+            this.startRecordingToolStripMenuItem,
+            this.stopRecorgingToolStripMenuItem,
+            this.runScriptToolStripMenuItem,
+            this.runSelectionToolStripMenuItem,
+            this.breakScriptToolStripMenuItem});
             this.automationToolStripMenuItem.Name = "automationToolStripMenuItem";
             this.automationToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
             this.automationToolStripMenuItem.Text = "Automation";
             // 
             // startRecordingToolStripMenuItem
             // 
-            this.startRecordingToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("startRecordingToolStripMenuItem.Image")));
             this.startRecordingToolStripMenuItem.Name = "startRecordingToolStripMenuItem";
             this.startRecordingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.startRecordingToolStripMenuItem.Text = "Start recording";
@@ -711,7 +712,6 @@ namespace UIAutomationSpy
             // 
             // stopRecorgingToolStripMenuItem
             // 
-            this.stopRecorgingToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stopRecorgingToolStripMenuItem.Image")));
             this.stopRecorgingToolStripMenuItem.Name = "stopRecorgingToolStripMenuItem";
             this.stopRecorgingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.stopRecorgingToolStripMenuItem.Text = "Stop recorging";
@@ -719,7 +719,6 @@ namespace UIAutomationSpy
             // 
             // runScriptToolStripMenuItem
             // 
-            this.runScriptToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("runScriptToolStripMenuItem.Image")));
             this.runScriptToolStripMenuItem.Name = "runScriptToolStripMenuItem";
             this.runScriptToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.runScriptToolStripMenuItem.Text = "Run script";
@@ -727,7 +726,6 @@ namespace UIAutomationSpy
             // 
             // runSelectionToolStripMenuItem
             // 
-            this.runSelectionToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("runSelectionToolStripMenuItem.Image")));
             this.runSelectionToolStripMenuItem.Name = "runSelectionToolStripMenuItem";
             this.runSelectionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.runSelectionToolStripMenuItem.Text = "Run selection";
@@ -735,7 +733,6 @@ namespace UIAutomationSpy
             // 
             // breakScriptToolStripMenuItem
             // 
-            this.breakScriptToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("breakScriptToolStripMenuItem.Image")));
             this.breakScriptToolStripMenuItem.Name = "breakScriptToolStripMenuItem";
             this.breakScriptToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.breakScriptToolStripMenuItem.Text = "Break script";
@@ -744,8 +741,8 @@ namespace UIAutomationSpy
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                                    this.customizeToolStripMenuItem,
-                                    this.optionsToolStripMenuItem});
+            this.customizeToolStripMenuItem,
+            this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
@@ -765,11 +762,11 @@ namespace UIAutomationSpy
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                                    this.contentsToolStripMenuItem,
-                                    this.indexToolStripMenuItem,
-                                    this.searchToolStripMenuItem,
-                                    this.toolStripSeparator7,
-                                    this.aboutToolStripMenuItem});
+            this.contentsToolStripMenuItem,
+            this.indexToolStripMenuItem,
+            this.searchToolStripMenuItem,
+            this.toolStripSeparator7,
+            this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "&Help";
@@ -803,13 +800,53 @@ namespace UIAutomationSpy
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
             // 
+            // Browse
+            // 
+            this.Browse.Location = new System.Drawing.Point(332, 340);
+            this.Browse.Name = "Browse";
+            this.Browse.Size = new System.Drawing.Size(75, 23);
+            this.Browse.TabIndex = 7;
+            this.Browse.Text = "Browse...";
+            this.Browse.UseVisualStyleBackColor = true;
+            this.Browse.Click += new System.EventHandler(this.Browse_Click);
+            // 
+            // xmlfile
+            // 
+            this.xmlfile.Enabled = false;
+            this.xmlfile.Location = new System.Drawing.Point(60, 340);
+            this.xmlfile.Name = "xmlfile";
+            this.xmlfile.Size = new System.Drawing.Size(264, 20);
+            this.xmlfile.TabIndex = 8;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 341);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Save to";
+            // 
+            // status
+            // 
+            this.status.AutoSize = true;
+            this.status.Location = new System.Drawing.Point(61, 367);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(0, 13);
+            this.status.TabIndex = 10;
+            // 
             // SpyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(444, 337);
+            this.ClientSize = new System.Drawing.Size(448, 386);
+            this.Controls.Add(this.status);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.xmlfile);
+            this.Controls.Add(this.Browse);
             this.Controls.Add(this.tabOuter);
             this.Controls.Add(this.menuStrip1);
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "SpyForm";
@@ -838,6 +875,7 @@ namespace UIAutomationSpy
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
@@ -912,6 +950,11 @@ namespace UIAutomationSpy
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.RichTextBox richControlCode;
         private System.Windows.Forms.Button btnStart;
+        private Button Browse;
+        private TextBox xmlfile;
+        private Label label1;
+        private Label status;
+        private Button btnSaveControl;
         
     }
     
