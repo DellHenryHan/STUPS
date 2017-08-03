@@ -1258,8 +1258,17 @@ namespace UIAutomationSpy
             }
         }
 
+        private void TxtFullCode_Changed(object sender, EventArgs e)
+        {
+            if (txtFullCode.Text.Trim() != "")
+            {
+                btnSaveControl_Click(sender,e);
+            }
+        }
+
         private void btnSaveControl_Click(object sender, EventArgs e)
         {
+            int count = 0;
             try
             {
                 XmlDocument xml=new XmlDocument();
@@ -1272,7 +1281,7 @@ namespace UIAutomationSpy
                 {
                     xml.AppendChild(xml.CreateElement("UIAutomation"));
                 }
-                code_To_Xml(txtFullCode.Text);
+                count=code_To_Xml(xml,txtFullCode.Text);
                 xml.Save(xmlfile.Text);
             }
             catch (Exception ex)
@@ -1280,20 +1289,43 @@ namespace UIAutomationSpy
                 status.Text = ex.Message;
                 return;
             }
-            status.Text = "Saved";
+            status.Text = count.ToString()+" elements are saved!";
         }
 
-        private void code_To_Xml(string code)
+        private int code_To_Xml(XmlDocument xml,string code)
         {
-            Regex reg = new Regex("(Get-UIA)*. -(*.) (&.)");
+            Regex reg = new Regex("(Get-Uia\\w+) (-(\\w+) '(.*?)' ?)+");
             string[] ObjStrings = code.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            for (int i = 0; i < ObjStrings.Length;i++ )
+            XmlNode parent = xml.SelectSingleNode("UIAutomation");
+            int count = 0;
+            string parentString = "";
+            for (int i =0; i<ObjStrings.Length ;i++ )
             {
                 string ObjCmd=ObjStrings[i].Trim("| `".ToCharArray());
-                string method=ObjCmd.Substring(0,ObjCmd.IndexOf(" "));
-                Console.WriteLine(method);
-                Console.WriteLine(ObjCmd.Substring(ObjCmd.IndexOf(" ")));
+                parentString += ObjCmd;
+                Match match=reg.Match(ObjCmd);
+                string InternalId = parentString.GetHashCode().ToString();
+                string xpath = "//[@InternalId='" + InternalId + "']";
+                XmlNode existingNode = xml.SelectSingleNode("//*[@InternalId='" + InternalId + "']");
+                if ( existingNode==null)
+                {
+                    XmlElement node = xml.CreateElement("Node");
+                    node.SetAttribute("Method", match.Groups[1].Value);
+                    node.SetAttribute("InternalId", InternalId);
+                    for (int j = 0; j < match.Groups[3].Captures.Count; j++)
+                    {
+                        node.SetAttribute(match.Groups[3].Captures[j].Value, match.Groups[4].Captures[j].Value);
+                    }
+                    parent.AppendChild(node);
+                    parent = node;
+                    count++;
+                }
+                else
+                {
+                    parent = existingNode;
+                }
             }
+            return count;
         }
 
     }

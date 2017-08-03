@@ -274,6 +274,7 @@ namespace UIAutomationSpy
             this.txtFullCode.Name = "txtFullCode";
             this.txtFullCode.Size = new System.Drawing.Size(348, 97);
             this.txtFullCode.TabIndex = 5;
+            this.txtFullCode.TextChanged += new System.EventHandler(this.TxtFullCode_Changed);
             // 
             // richPatterns
             // 
